@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      width: 300px;
+      background-color: black;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .display {
+      width: 100%;
+      height: 80px;
+      background-color: white;
+      padding: 20px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      width: 100%;
+      background-color: blue;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+
+    button {
+      flex: 1;
+      margin: 5px;
+      padding: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="calculator">
+      <div class="display" id="display"></div>
+      <div class="buttons">
+        <div class="row">
+          <button id="btn7">7</button>
+          <button id="btn8">8</button>
+          <button id="btn9">9</button>
+          <button id="divide">/</button>
+        </div>
+        <div class="row">
+          <button id="btn6">6</button>
+          <button id="btn5">5</button>
+          <button id="btn4">4</button>
+          <button id="add">+</button>
+        </div>
+        <div class="row">
+          <button id="btn3">3</button>
+          <button id="btn2">2</button>
+          <button id="btn1">1</button>
+          <button id="multiply">*</button>
+        </div>
+        <div class="row">
+          <button id="btn0">0</button>
+          <button id="subtract">-</button>
+          
+        </div>
+        <div class="row">
+          <button id="clear" style="flex: 2;">C</button>
+          <button id="equals" style="flex: 2;">=</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    let expression = "";
+
+    function updateDisplay(value) {
+      expression += value;
+      display.textContent = expression;
+    }
+
+    // Numbers
+    document.getElementById("btn0").onclick = () => updateDisplay("0");
+    document.getElementById("btn1").onclick = () => updateDisplay("1");
+    document.getElementById("btn2").onclick = () => updateDisplay("2");
+    document.getElementById("btn3").onclick = () => updateDisplay("3");
+    document.getElementById("btn4").onclick = () => updateDisplay("4");
+    document.getElementById("btn5").onclick = () => updateDisplay("5");
+    document.getElementById("btn6").onclick = () => updateDisplay("6");
+    document.getElementById("btn7").onclick = () => updateDisplay("7");
+    document.getElementById("btn8").onclick = () => updateDisplay("8");
+    document.getElementById("btn9").onclick = () => updateDisplay("9");
+
+    // Operators
+    document.getElementById("add").onclick = () => updateDisplay("+");
+    document.getElementById("subtract").onclick = () => updateDisplay("-");
+    document.getElementById("multiply").onclick = () => updateDisplay("*");
+    document.getElementById("divide").onclick = () => updateDisplay("/");
+
+    // Clear
+    document.getElementById("clear").onclick = () => {
+      expression = "";
+      display.textContent = "";
+    };
+
+  
+    document.getElementById("equals").onclick = () => {
+      try {
+        expression = eval(expression);
+        display.textContent = expression;
+      } catch (e) {
+        display.textContent = "Error";
+        expression = "";
+      }
+    };
+  </script>
+</body>
+
+</html>
